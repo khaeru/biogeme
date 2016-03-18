@@ -1,9 +1,9 @@
 import sys
 import sysconfig
-option=sys.argv[1]
+option=sys.argv[1].lstrip('-')
 if option=='includes':
  print('-I' + sysconfig.get_path('include') + ' -I' + sysconfig.get_path('platinclude'))
-if option=='cxxflags':
+if option=='cflags':
  flags=sysconfig.get_config_var('CFLAGS').split()
  for unflag in ['-Wno-unused-result','-Wstrict-prototypes']:
   if flags.count(unflag) > 0:

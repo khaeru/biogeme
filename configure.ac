@@ -230,26 +230,26 @@ if test "x$PYTHONBIN" = "xno"; then
     NEWBIO_SUGGEST="(python 3.1, 3.2, 3.3, 3.3, 3.4 or 3.5 not found in $with_python_dir)"
   fi
 #  PYTHONBIN = "$SHELL $missing_dir/missing python3.2"
-else 
-  PYTHONBINBASE="`basename $PYTHONBIN`"
-  case "${PYTHONBINBASE}" in
-   "python3.5") PYTHONCONFIG="$srcdir/pythonbiogeme/python/biogeme-python3.5-config.py";;
-   "python3.4") PYTHONCONFIG="$srcdir/pythonbiogeme/python/biogeme-python3.4-config.py";;
-   "python3.3m") PYTHONCONFIG="$srcdir/pythonbiogeme/python/biogeme-python3.3-config.py";;
-   "python3.3") PYTHONCONFIG="$srcdir/pythonbiogeme/python/biogeme-python3.3-config.py";;
-   "python3.2") PYTHONCONFIG="$srcdir/pythonbiogeme/python/biogeme-python3.2-config.py";;
-   "python3.1") PYTHONCONFIG="$srcdir/pythonbiogeme/python/biogeme-python3.1-config.py";;
-   "python3.2-cygwin") PYTHONCONFIG="$srcdir/pythonbiogeme/python/biogeme-python3.2-cygwin-config.py";;
-  esac
-  PYTHONHEADERDIR="`$PYTHONBIN $PYTHONCONFIG headerdir`"
-  AC_CHECK_HEADERS([$PYTHONHEADERDIR/Python.h],[python_header=yes],[python_header=no])
+else
+  PYTHONBINBASE=$(basename $PYTHONBIN)
+  AC_PROG_SED
+  AC_PATH_PROG([DPKG_ARCH], [dpkg-architecture])
+  if test "x$DPKG_ARCH" = "x" ; then
+    PYTHONCONFIG="$PYTHONBIN $srcdir/pythonbiogeme/python/biogeme-$PYTHONBINBASE-config.py"
+  else
+    DEB_HOST_MULTIARCH=$($DPKG_ARCH -qDEB_HOST_MULTIARCH)
+    PYTHONCONFIG="$DEB_HOST_MULTIARCH-$PYTHONBINBASE-config"
+  fi
+  CPPFLAGS+=" $($PYTHONCONFIG --includes)"
+  AC_CHECK_HEADERS([Python.h],[python_header=yes],[python_header=no])
   if test "x$enable_python" = "xyes" -a "x$python_header" = "xyes"; then
     NEWBIO="yes"
-    NEWBIO_SUGGEST="(Python version `$PYTHONBIN $PYTHONCONFIG version`)"
-    PYTHON_INCLUDES="`$PYTHONBIN $PYTHONCONFIG includes`"
-    PYTHON_CXXFLAGS="`$PYTHONBIN $PYTHONCONFIG cxxflags`"
-    PYTHON_LIBS="`$PYTHONBIN $PYTHONCONFIG libs`"
-    PYTHON_LDFLAGS="`$PYTHONBIN $PYTHONCONFIG ldflags`"
+    NEWBIO_SUGGEST="(`$PYTHONBIN --version`)"
+    PYTHON_INCLUDES="`$PYTHONCONFIG --includes`"
+    PYTHON_CXXFLAGS="`$PYTHONCONFIG --cflags |
+      $SED -e 's/\(-Wstrict-prototypes\|-Wno-unused-result\|\n\)//g'`"
+    PYTHON_LIBS="`$PYTHONCONFIG --libs`"
+    PYTHON_LDFLAGS="`$PYTHONCONFIG --ldflags`"
     AC_SUBST(PYTHON_INCLUDES)
     AC_SUBST(PYTHON_CXXFLAGS)
     AC_SUBST(PYTHON_LIBS)
