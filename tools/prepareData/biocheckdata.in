@@ -1,0 +1,26 @@
+#!/bin/bash -e
+# -e: Exit immediately if a command exits with a non-zero status.
+
+prefix="@prefix@"
+exec_prefix="@exec_prefix@"
+bindir="@bindir@"
+pkgincludedir="@includedir@/@PACKAGE@@INSTALL_VERSION_SUFFIX@"
+pkglibdir="@libdir@/@PACKAGE@@INSTALL_VERSION_SUFFIX@"
+datarootdir="@datarootdir@"
+datadir="@datadir@"
+pkgdatadir="@datadir@/@PACKAGE@@INSTALL_VERSION_SUFFIX@"
+versionsuffix="@INSTALL_VERSION_SUFFIX@"
+pythonbin="@PYTHONBIN@"
+
+if [ $# -ne 1 ]; then
+  echo 'One argument is required: the name of the data file.'
+  exit -1
+fi
+m=$1 
+if [ ! -f "${m}" ]
+then
+  echo "File ${m} not found!"
+  exit
+fi
+"${pythonbin}" "${pkgdatadir}/biocheckdata.py" "${m}"
+

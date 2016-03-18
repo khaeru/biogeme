@@ -1,0 +1,24 @@
+#!/bin/bash -e
+# -e: Exit immediately if a command exits with a non-zero status.
+prefix="@prefix@"
+exec_prefix="@exec_prefix@"
+bindir="@bindir@"
+pkgincludedir="@includedir@/@PACKAGE@@INSTALL_VERSION_SUFFIX@"
+pkglibdir="@libdir@/@PACKAGE@@INSTALL_VERSION_SUFFIX@"
+datarootdir="@datarootdir@"
+datadir="@datadir@"
+pkgdatadir="@datadir@/@PACKAGE@@INSTALL_VERSION_SUFFIX@"
+versionsuffix="@INSTALL_VERSION_SUFFIX@"
+
+if [ $# -ne 2 ]; then
+  echo 'Two arguments are required: the name of file with the raw data, and the size of the bins.'
+  exit -1
+fi
+f=$1
+if [ ! -f "${f}" ]
+then
+  echo "File ${f} not found!"
+  exit
+fi
+export PYTHONPATH=.:"${pkgdatadir}":$PYTHONPATH
+@PYTHONBIN@ "${pkgdatadir}"/generateWeightedHistogram.py "${f}" $2

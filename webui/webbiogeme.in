@@ -1,0 +1,14 @@
+#!/bin/bash -e
+# -e: Exit immediately if a command exits with a non-zero status.
+prefix="@prefix@"
+exec_prefix="@exec_prefix@"
+bindir="@bindir@"
+pkgincludedir="@includedir@/@PACKAGE@@INSTALL_VERSION_SUFFIX@"
+pkglibdir="@libdir@/@PACKAGE@@INSTALL_VERSION_SUFFIX@"
+datarootdir="@datarootdir@"
+datadir="@datadir@"
+pkgdatadir="@datadir@/@PACKAGE@@INSTALL_VERSION_SUFFIX@"
+versionsuffix="@INSTALL_VERSION_SUFFIX@"
+
+export PYTHONPATH=.:"${pkgdatadir}":$PYTHONPATH
+@PYTHONBIN@ "${pkgdatadir}"/up.py openBrowser

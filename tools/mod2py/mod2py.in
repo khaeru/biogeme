@@ -1,0 +1,29 @@
+#!/bin/bash -e
+# -e: Exit immediately if a command exits with a non-zero status.
+
+prefix="@prefix@"
+exec_prefix="@exec_prefix@"
+bindir="@bindir@"
+versionsuffix="@INSTALL_VERSION_SUFFIX@"
+
+if [ $# -ne 1 ]; then
+  echo 'One argument is required: the name of the mod file (without extension).'
+  exit -1
+fi
+m=$1 
+if [ ! -f "${m}.mod" ]
+then
+  echo "File ${m}.mod not found!"
+  exit
+fi
+cp "${m}.mod" /tmp
+curdir=`pwd`
+cd /tmp
+echo "[GEV]" > "${m}.par"
+echo "gevGeneratePythonFile = 1" >> "${m}.par"
+echo "gevPythonFileWithEstimatedParam = 0" >> "${m}.par"
+echo "dummy" > "${m}.dat"
+${bindir}/biogeme${versionsuffix} "${m}" "${m}.dat"
+cp "${m}.py" "${curdir}"
+rm "${m}.mod" "${m}.py" "${m}.par" "${m}.dat" "${m}.log" "parameters.out" "__specFile.debug"
+cd "${curdir}"
