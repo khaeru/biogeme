@@ -3,8 +3,11 @@ aclocal.m4
 autom4te.cache
 config.guess
 config.h*
+config.log
 config.sub
+config.status
 configure
 ltmain.sh
 m4/
+Makefile
 Makefile.in
