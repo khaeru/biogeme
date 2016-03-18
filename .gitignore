@@ -28,4 +28,12 @@ tools/prepareData/biosampledata
 webui/webbiogeme
 
 # Compiled files
+*.a
+*.o
+*.la
+*.lo
 doc/tutorialBiogeme.pdf
+libraries/pythonbiogeme/bioCompilationDate.h
+libraries/pythonbiogeme/bioUser.h
+libraries/utils/patCompilationDate.h
+libraries/utils/patUser.h
