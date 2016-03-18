@@ -3,7 +3,7 @@
 
 #
 # NEED TO DISABLE THE OPTION:  --disable-dependency-tracking
-# did not work without it on Farideh's mac. Bug of automake. 
+# did not work without it on Farideh's mac. Bug of automake.
 #
 AC_PREREQ([2.68])
 LT_PREREQ([2.4])
@@ -16,31 +16,31 @@ LT_INIT([disable-static])
 LT_LANG([C++])
 
 AM_INIT_AUTOMAKE([no-dependencies -Wno-portability])
-AC_CONFIG_FILES([Makefile 
-	libraries/utils/Makefile 
-	libraries/linearAlgebra/Makefile 
-	libraries/trustRegion/Makefile 
-	libraries/cfsqp/Makefile 
-	libraries/donlp2/Makefile 
-	libraries/solvopt/Makefile 
-	libraries/randomNumbers/Makefile 
-	libraries/gaussHermite/Makefile 
-	libraries/parameters/Makefile 
-	libraries/bisonbiogeme/Makefile 
-	libraries/pythonbiogeme/Makefile 
-	libraries/Makefile 
-        tools/histograms/Makefile
-        tools/prepareData/Makefile
-        tools/mod2py/Makefile
-        biogeme/Makefile
-	biosim/Makefile 
-	biomerge/Makefile 
-        pythonbiogeme/Makefile        
-	pybiogeme/Makefile
-	testing/Makefile
-        doc/Makefile
-        webui/Makefile
-        gui/Makefile])
+AC_CONFIG_FILES([Makefile
+  libraries/utils/Makefile
+  libraries/linearAlgebra/Makefile
+  libraries/trustRegion/Makefile
+  libraries/cfsqp/Makefile
+  libraries/donlp2/Makefile
+  libraries/solvopt/Makefile
+  libraries/randomNumbers/Makefile
+  libraries/gaussHermite/Makefile
+  libraries/parameters/Makefile
+  libraries/bisonbiogeme/Makefile
+  libraries/pythonbiogeme/Makefile
+  libraries/Makefile
+  tools/histograms/Makefile
+  tools/prepareData/Makefile
+  tools/mod2py/Makefile
+  biogeme/Makefile
+  biosim/Makefile
+  biomerge/Makefile
+  pythonbiogeme/Makefile
+  pybiogeme/Makefile
+  testing/Makefile
+  doc/Makefile
+  webui/Makefile
+  gui/Makefile])
 AC_CONFIG_FILES([pythonbiogeme/pythonbiogeme],[chmod +x pythonbiogeme/pythonbiogeme])
 AC_CONFIG_FILES([pythonbiogeme/debugbiogeme],[chmod +x pythonbiogeme/debugbiogeme])
 AC_CONFIG_FILES([webui/webbiogeme],[chmod +x webui/webbiogeme])
@@ -139,7 +139,7 @@ AC_ARG_ENABLE([versioned],AC_HELP_STRING([--enable-versioned],[Install with vers
 #AC_CHECK_LIB([gslcblas],[cblas_dgemm])
 #AC_CHECK_LIB([gsl],[gsl_blas_dgemm])
 
-#if test "x$ac_cv_lib_gsl_gsl_blas_dgemm" == "xyes"; then 
+#if test "x$ac_cv_lib_gsl_gsl_blas_dgemm" == "xyes"; then
 #     WITHGSL="yes"
 #else
 #     WITHGSL="no"
@@ -199,7 +199,7 @@ AC_PROG_LIBTOOL
 AC_PATH_PROG([FLTKCONFIG],[fltk-config],[no],[$fltk_path])
 if test "x$FLTKCONFIG" = "xno"; then
   WINBIO="no"
-  if test "x$with_fltk_dir" = "x" ; then 
+  if test "x$with_fltk_dir" = "x" ; then
     WINBIO_SUGGEST="(Download and install fltk)"
   else
     WINBIO_SUGGEST="(fltk-config not found in $with_fltk_dir)"
@@ -255,7 +255,7 @@ else
     AC_SUBST(PYTHON_LIBS)
     AC_SUBST(PYTHON_LDFLAGS)
     AC_SUBST(PYTHONBIN)
-  else 
+  else
     NEWBIO="no"
     if test "x$python_header" = "xno"; then
       NEWBIO_SUGGEST="(Install python3-dev)"
@@ -268,7 +268,7 @@ fi
 if test "x$enable_bison" = "xyes" ; then
   BISONBIO="yes"
   BISONBIO_SUGGEST=""
-else 
+else
   BISONBIO="no"
   BISONBIO_SUGGEST="(use option --enable-bison)"
 fi
