@@ -1,6 +1,7 @@
 # GNU autotools
 aclocal.m4
 autom4te.cache
+compile
 config.guess
 config.h*
 config.log
@@ -13,7 +14,9 @@ ltmain.sh
 m4/
 Makefile
 Makefile.in
+missing
 stamp-h1
+ylwrap
 
 ## Executables created by configure
 pythonbiogeme/debugbiogeme
