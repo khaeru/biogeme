@@ -2,7 +2,9 @@
 aclocal.m4
 autom4te.cache
 config.guess
+config.h*
 config.sub
 configure
 ltmain.sh
 m4/
+Makefile.in
