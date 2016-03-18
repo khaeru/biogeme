@@ -1,1 +1,8 @@
+# GNU autotools
+aclocal.m4
 autom4te.cache
+config.guess
+config.sub
+configure
+ltmain.sh
+m4/
