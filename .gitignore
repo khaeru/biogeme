@@ -7,6 +7,7 @@ config.log
 config.sub
 config.status
 configure
+install-sh
 libtool
 ltmain.sh
 m4/
@@ -25,3 +26,6 @@ tools/prepareData/biocheckdata
 tools/prepareData/biopreparedata
 tools/prepareData/biosampledata
 webui/webbiogeme
+
+# Compiled files
+doc/tutorialBiogeme.pdf
